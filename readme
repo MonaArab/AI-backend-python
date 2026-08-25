@@ -1,0 +1,76 @@
+app.main:app
+│    │     │
+│    │     └── variable: app = FastAPI()
+│    │
+│    └──────── module: main.py
+│
+└───────────── package: app/
+Earlier you created a .venv, so use the Python inside that virtual environment.
+source .venv/bin/activate
+which python -> /ai-backend/.venv/bin/python
+then run 
+python -m uvicorn app.main:app --reload
+
+
+install first time
+python -m uvicorn app.main:app --reload
+check
+python -m pip show uvicorn
+----------------------------------------------------------------------------------------------
+Database:
+PostgreSQL
+│
+├── database: ai_backend
+│
+└── user: ai_user
+psql -h localhost -U ai_user -d ai_backend
+CREATE USER ai_user WITH PASSWORD 'ai';
+CREATE DATABASE ai_backend OWNER ai_user;
+
+Engine
+  ↓
+database connectivity + connection pool
+
+SessionLocal
+  ↓
+factory for SQLAlchemy sessions
+
+Session
+  ↓
+unit used to query/change DB data
+
+Base
+  ↓
+parent for ORM models
+----------------------------------------------------------------------------------------------
+Alembic
+SQLAlchemy model
+      ↓
+Alembic migration
+      ↓
+PostgreSQL
+
+alembic revision --autogenerate -m "add product description"
+alembic upgrade head
+----------------------------------------------------------------------------------------------
+LLM
+→ generates/understands natural-language responses
+
+Embedding model
+→ converts information into vectors
+
+pgvector
+→ stores/searches those vectors
+
+sql -> In pgvector, <=> is the cosine distance operator.
+SQLAlchemy -> Product.embedding.cosine_distance(query_embedding)
+
+| Metric                    | pgvector operator   | SQLAlchemy            |
+
+| Euclidean / L2 distance      | <->              | l2_distance()       |
+| Negative inner product  	 | <#>             | max_inner_product() |
+| Cosine distance      	 | <=>             | cosine_distance()   |
+
+----------------------------------------------------------------------------------------------
+install pgvector in python directory of project
+python -m pip install pgvector
