@@ -1,0 +1,7 @@
+# AI Backend
+A FastAPI backend for managing product data through a REST API.
+Provides product creation, listing, retrieval, update, partial update, and deletion.
+Uses PostgreSQL with SQLAlchemy ORM and Alembic for database migrations.
+Stores 384-dimensional embeddings with the pgvector PostgreSQL extension.
+Generates embeddings with `sentence-transformers/all-MiniLM-L6-v2`.
+Supports cosine-similarity semantic product search with configurable limits and thresholds.
