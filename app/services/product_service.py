@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
 from app.services.embedding_service import EmbeddingService
 from app.models.product import Product
 from app.schemas.product import *

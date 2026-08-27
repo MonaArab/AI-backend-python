@@ -7,6 +7,7 @@ from app.db.database import Base, engine
 from app.models.product import Product
 
 from app.routers.products import router as products_router
+from app.routers.documents import router as documents_router
 
 #looks at all registered SQLAlchemy models and creates missing tables.
 #remove beacuse use alembic to manage databse
@@ -19,6 +20,7 @@ app = FastAPI(
 
 #Without it, FastAPI doesn't know about your product endpoints.
 app.include_router(products_router)
+app.include_router(documents_router)
 
 
 @app.get("/health")
